@@ -22,6 +22,6 @@ app.use((err, req, res, next) => {
 app.listen(process.env.PORT, async () => 
 {
   console.log('Listening on: ' + process.env.PORT)
-  // const result = await db.query(programmingLanguagesModel.deleteRowsQuery)
+  // const result = await db.query(programmingLanguagesModel.insertDummyDataQuery)
   // console.log(result)
 })
