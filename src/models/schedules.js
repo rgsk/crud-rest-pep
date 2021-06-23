@@ -1,14 +1,25 @@
 const tableName = 'schedules';
+const columns = {
+  id: 'id',
+  batch_id: 'batch_id',
+  title: 'title',
+  start_time: 'start_time',
+  end_time: 'end_time',
+  duration: 'duration',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+};
 const createTableQuery = `
 CREATE TABLE IF NOT EXISTS ${tableName}
 (
-  id            INT NOT NULL auto_increment ,
-  batch_id      INT NOT NULL,
-  start_time    DATETIME NOT NULL,
-  end_time      DATETIME NOT NULL,
-  duration      INT NOT NULL,
-  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  updated_at    DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  ${columns.id}            INT NOT NULL auto_increment ,
+  ${columns.batch_id}      INT NOT NULL,
+  ${columns.title}         VARCHAR(255),
+  ${columns.start_time}    DATETIME NOT NULL,
+  ${columns.end_time}      DATETIME NOT NULL,
+  ${columns.duration}      INT NOT NULL,
+  ${columns.created_at}    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  ${columns.updated_at}    DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (id),
   FOREIGN KEY (batch_id)
         REFERENCES batches (id)
@@ -17,7 +28,7 @@ CREATE TABLE IF NOT EXISTS ${tableName}
 `;
 const insertDummyDataQuery = `
 INSERT INTO ${tableName} 
-(batch_id, start_time, end_time, duration)
+( ${columns.batch_id}, ${columns.start_time}, ${columns.end_time}, ${columns.duration})
 VALUES 
 (1, '2021-6-12 05:00:00', '2021-6-12 06:00:00', 3600),
 (1, '2021-6-13 05:00:00', '2021-6-13 06:00:00', 3600),
@@ -33,6 +44,7 @@ DELETE FROM ${tableName}
 `;
 module.exports = {
   tableName,
+  columns,
   createTableQuery,
   insertDummyDataQuery,
   dropTableQuery,

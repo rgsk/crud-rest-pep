@@ -1,9 +1,8 @@
 require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
-const programmingLanguagesRouter = require('./routes/programmingLanguages');
+const schedulesRouter = require('./routes/schedules');
 const db = require('./services/db');
-const programmingLanguagesModel = require('./models/programmingLanguages');
 const batchesModel = require('./models/batches');
 const schedulesModel = require('./models/schedules');
 const teachersModel = require('./models/teachers');
@@ -16,7 +15,7 @@ app.get('/', (req, res) => {
     message: 'Hello world',
   });
 });
-app.use('/programming-languages', programmingLanguagesRouter);
+app.use('/schedules', schedulesRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
@@ -28,7 +27,7 @@ app.use((err, req, res, next) => {
 app.listen(process.env.PORT, async () => {
   console.log('Listening on: ' + process.env.PORT);
   try {
-    // resetDB()
+    resetDB();
   } catch (err) {
     console.log(err.message);
   }
