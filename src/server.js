@@ -12,7 +12,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.json({
+    message: 'Hello world',
+  });
 });
 app.use('/programming-languages', programmingLanguagesRouter);
 
@@ -26,19 +28,26 @@ app.use((err, req, res, next) => {
 app.listen(process.env.PORT, async () => {
   console.log('Listening on: ' + process.env.PORT);
   try {
+    // resetDB()
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+const resetDB = async () => {
+  try {
     await dropAllTables();
     await createAllTables();
     await insertDummyDataAllTables();
   } catch (err) {
     console.log(err.message);
   }
-});
+};
 const dropAllTables = async () => {
   try {
-    // await db.query(scheduleTeacherModel.dropTableQuery);
-    // await db.query(teachersModel.dropTableQuery);
-    // await db.query(schedulesModel.dropTableQuery);
-    // await db.query(batchesModel.dropTableQuery);
+    await db.query(scheduleTeacherModel.dropTableQuery);
+    await db.query(teachersModel.dropTableQuery);
+    await db.query(schedulesModel.dropTableQuery);
+    await db.query(batchesModel.dropTableQuery);
   } catch (err) {
     console.log(err.message);
   }
