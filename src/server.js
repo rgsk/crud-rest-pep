@@ -2,6 +2,8 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const schedulesRouter = require('./routes/schedules');
+const batchesRouter = require('./routes/batches');
+const teachersRouter = require('./routes/teachers');
 const db = require('./services/db');
 const batchesModel = require('./models/batches');
 const schedulesModel = require('./models/schedules');
@@ -16,6 +18,8 @@ app.get('/', (req, res) => {
   });
 });
 app.use('/schedules', schedulesRouter);
+app.use('/batches', batchesRouter);
+app.use('/teachers', teachersRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

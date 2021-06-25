@@ -31,6 +31,7 @@ DELETE FROM ${tableName}
 `;
 module.exports = {
   tableName,
+  columns,
   createTableQuery,
   insertDummyDataQuery,
   dropTableQuery,
