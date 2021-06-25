@@ -3,6 +3,7 @@ const columns = {
   id: 'id',
   batch_id: 'batch_id',
   title: 'title',
+  description: 'description',
   start_time: 'start_time',
   end_time: 'end_time',
   duration: 'duration',
@@ -14,7 +15,8 @@ CREATE TABLE IF NOT EXISTS ${tableName}
 (
   ${columns.id}            INT NOT NULL auto_increment ,
   ${columns.batch_id}      INT NOT NULL,
-  ${columns.title}         VARCHAR(255),
+  ${columns.title}         VARCHAR(255) DEFAULT '(No Title)',
+  ${columns.description}   TEXT DEFAULT '(No Description)',
   ${columns.start_time}    DATETIME NOT NULL,
   ${columns.end_time}      DATETIME NOT NULL,
   ${columns.duration}      INT NOT NULL,

@@ -1,9 +1,9 @@
 const db = require('./db');
 const { tableName, columns } = require('../models/schedules');
-const { updateDateFields } = require('../utils');
+
 async function getMultiple() {
   const rows = await db.query(`SELECT * FROM ${tableName}`);
-  return rows.map((row) => updateDateFields(row));
+  return rows;
 }
 async function getSingle(id) {
   const rows = await db.query(`SELECT * FROM ${tableName} WHERE id = ?`, [id]);
@@ -13,7 +13,7 @@ async function getSingle(id) {
     };
   }
 
-  return updateDateFields(rows[0]);
+  return rows[0];
 }
 async function create(schedule) {
   const result = await db.query(
@@ -42,7 +42,7 @@ async function create(schedule) {
     );
     return {
       message: `new entry created in table ${tableName} successfully`,
-      entry: updateDateFields(rows[0]),
+      entry: rows[0],
     };
   } else {
     return { message: `Error in create for table ${tableName}` };
@@ -73,7 +73,7 @@ async function update(id, schedule) {
     );
     return {
       message: `${tableName} updated successfully`,
-      entry: updateDateFields(rows[0]),
+      entry: rows[0],
     };
   } else {
     return { message: `Error in updating ${tableName}` };

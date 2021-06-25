@@ -1,19 +1,27 @@
 const tableName = 'batches';
+const columns = {
+  id: 'id',
+  name: 'name',
+  start_date: 'start_date',
+  duration: 'duration',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+};
 const createTableQuery = `
 CREATE TABLE IF NOT EXISTS ${tableName}
 (
-  id            INT NOT NULL auto_increment ,
-  name          VARCHAR(255) NOT NULL,
-  start_date    DATE NOT NULL,
-  duration      VARCHAR(255) NOT NULL,
-  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  updated_at    DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  ${columns.id}            INT NOT NULL auto_increment ,
+  ${columns.name}          VARCHAR(255) NOT NULL,
+  ${columns.start_date}    DATE NOT NULL,
+  ${columns.duration}      VARCHAR(255) NOT NULL,
+  ${columns.created_at}    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  ${columns.updated_at}    DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (id)
 )
 `;
 const insertDummyDataQuery = `
 INSERT INTO batches 
-(name, start_date, duration)
+(${columns.name}, ${columns.start_date}, ${columns.duration})
 VALUES 
 ('c++', '2021-6-12', '3 months'),
 ('java', '2021-7-1', '2 months'),
@@ -29,6 +37,7 @@ DELETE FROM ${tableName}
 `;
 module.exports = {
   tableName,
+  columns,
   createTableQuery,
   insertDummyDataQuery,
   dropTableQuery,
