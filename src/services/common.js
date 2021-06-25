@@ -16,7 +16,10 @@ function commonServices(tableName, columns) {
         };
       }
 
-      return rows[0];
+      return {
+        message: `fetched successfully`,
+        entry: rows[0],
+      };
     },
     create: async (entity, fallbackValues) => {
       const { str, arr } = insertStringAndArray(
