@@ -1,6 +1,7 @@
 require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
+const morgan = require('morgan');
 const schedulesRouter = require('./routes/schedules');
 const batchesRouter = require('./routes/batches');
 const teachersRouter = require('./routes/teachers');
@@ -10,6 +11,7 @@ const schedulesModel = require('./models/schedules');
 const teachersModel = require('./models/teachers');
 const scheduleTeacherModel = require('./models/schedule_teacher');
 const app = express();
+app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
@@ -17,6 +19,11 @@ app.get('/', (req, res) => {
     message: 'Hello world',
   });
 });
+// app.use((req, res, next) => {
+//   console.log('request');
+//   console.log(req.path);
+//   next();
+// });
 app.use('/schedules', schedulesRouter);
 app.use('/batches', batchesRouter);
 app.use('/teachers', teachersRouter);
