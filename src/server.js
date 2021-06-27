@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const schedulesRouter = require('./routes/schedules');
 const batchesRouter = require('./routes/batches');
 const teachersRouter = require('./routes/teachers');
+const scheduleTeacherRouter = require('./routes/schedule_teacher');
 const db = require('./services/db');
 const batchesModel = require('./models/batches');
 const schedulesModel = require('./models/schedules');
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 app.use('/schedules', schedulesRouter);
 app.use('/batches', batchesRouter);
 app.use('/teachers', teachersRouter);
+app.use('/schedule_teacher', scheduleTeacherRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
@@ -38,7 +40,7 @@ app.use((err, req, res, next) => {
 app.listen(process.env.PORT, async () => {
   console.log('Listening on: ' + process.env.PORT);
   try {
-    // resetDB();
+    resetDB();
   } catch (err) {
     console.log(err.message);
   }

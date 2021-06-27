@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS ${tableName}
   ${columns.id}            INT NOT NULL auto_increment ,
   ${columns.batch_id}      INT NOT NULL,
   ${columns.title}         VARCHAR(255) DEFAULT '(No Title)',
-  ${columns.description}   TEXT DEFAULT '(No Description)',
+  ${columns.description}   TEXT,
   ${columns.start_time}    DATETIME NOT NULL,
   ${columns.end_time}      DATETIME NOT NULL,
   ${columns.duration}      INT NOT NULL,

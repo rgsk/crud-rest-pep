@@ -1,12 +1,19 @@
 const tableName = 'schedule_teacher';
+const columns = {
+  id: 'id',
+  schedule_id: 'schedule_id',
+  teacher_id: 'teacher_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+};
 const createTableQuery = `
 CREATE TABLE IF NOT EXISTS ${tableName}
 (
-  id            INT NOT NULL auto_increment ,
-  schedule_id   INT NOT NULL,
-  teacher_id    INT NOT NULL,
-  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  updated_at    DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  ${columns.id}            INT NOT NULL auto_increment ,
+  ${columns.schedule_id}   INT NOT NULL,
+  ${columns.teacher_id}    INT NOT NULL,
+  ${columns.created_at}    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  ${columns.updated_at}    DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (id),
   FOREIGN KEY (schedule_id)
   REFERENCES schedules (id)
@@ -34,6 +41,7 @@ DELETE FROM ${tableName}
 `;
 module.exports = {
   tableName,
+  columns,
   createTableQuery,
   insertDummyDataQuery,
   dropTableQuery,
